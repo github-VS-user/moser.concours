@@ -1,18 +1,23 @@
-from flask import Flask, jsonify
-import json
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-def charger_donnees():
-    try:
-        with open("data.json", "r") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return []
+eleves = [
+    {"nom": "Alice", "points": 50},
+    {"nom": "Bob", "points": 30}
+]
 
 @app.route('/eleves', methods=['GET'])
 def get_eleves():
-    return jsonify(charger_donnees())
+    return jsonify(eleves)
+
+@app.route('/ajouter_points', methods=['POST'])
+def ajouter_points():
+    data = request.json
+    for eleve in eleves:
+        if eleve["nom"] == data["nom"]:
+            eleve["points"] += data["points"]
+    return jsonify({"message": "Points ajoutés avec succès"}), 200
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=10000)
+    app.run(debug=True)
