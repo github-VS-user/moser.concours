@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 eleves = [
     {"nom": "Alice", "points": 50},
-    {"nom": "Bob", "points": 30}
+    {"nom": "Mme Grella", "points": 70}
 ]
 
 @app.route('/eleves', methods=['GET'])
