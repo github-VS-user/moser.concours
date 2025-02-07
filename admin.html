@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Interface Admin</h1>
+        <p>Liste des élèves</p>
+        <table border="1">
+            <tr>
+                <th>Nom</th>
+                <th>Points</th>
+            </tr>
+            <tbody id="listeEleves"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let eleves = [
+            {nom: "Alice", points: 50},
+            {nom: "Bob", points: 30}
+        ];
+
+        let liste = document.getElementById("listeEleves");
+        eleves.forEach(eleve => {
+            let row = `<tr><td>${eleve.nom}</td><td>${eleve.points}</td></tr>`;
+            liste.innerHTML += row;
+        });
+    </script>
+</body>
+</html>
