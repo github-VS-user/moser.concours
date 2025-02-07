@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moser Concours</title>
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Bienvenue sur Moser Concours</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Points</th>
-            </tr>
-        </thead>
-        <tbody id="listeEleves"></tbody>
-    </table>
+    <div class="container">
+        <h1>Bienvenue sur Moser Concours</h1>
+        <p>Connectez-vous pour commencer</p>
+        <button onclick="loginEleve()">Connexion Élève</button>
+        <button onclick="loginAdmin()">Connexion Admin</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
