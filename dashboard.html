@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Élève</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tableau de Bord</h1>
+        <p>Nombre de points : <span id="points">0</span></p>
+        <button onclick="ajouterPoints()">Compléter une mission</button>
+    </div>
+
+    <script>
+        function ajouterPoints() {
+            let points = parseInt(localStorage.getItem("points") || "0");
+            points += 10;
+            localStorage.setItem("points", points);
+            document.getElementById("points").innerText = points;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("points").innerText = localStorage.getItem("points") || "0";
+        });
+    </script>
+</body>
+</html>
