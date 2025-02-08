@@ -14,22 +14,17 @@
             <tr>
                 <th>Nom</th>
                 <th>Points</th>
+                <th>Action</th>
             </tr>
             <tbody id="listeEleves"></tbody>
         </table>
+
+        <h2>Ajouter des points</h2>
+        <input type="text" id="nomEleve" placeholder="Nom de l'élève">
+        <input type="number" id="points" placeholder="Points">
+        <button onclick="ajouterPoints(document.getElementById('nomEleve').value, document.getElementById('points').value)">Ajouter</button>
     </div>
 
-    <script>
-        let eleves = [
-            {nom: "Alice", points: 50},
-            {nom: "Bob", points: 30}
-        ];
-
-        let liste = document.getElementById("listeEleves");
-        eleves.forEach(eleve => {
-            let row = `<tr><td>${eleve.nom}</td><td>${eleve.points}</td></tr>`;
-            liste.innerHTML += row;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
