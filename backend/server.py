@@ -39,11 +39,12 @@ def home():
 
 # Route: Get all students
 @app.route('/eleves', methods=['GET'])
+@jwt_required()
 def get_eleves():
     eleves = Eleve.query.all()
     return jsonify([{"nom": e.nom, "points": e.points} for e in eleves])
 
-# Route: Add points to a student (Admin only)
+# Route: Add or remove points (Admin only)
 @app.route('/ajouter_points', methods=['POST'])
 @jwt_required()
 def ajouter_points():
@@ -55,12 +56,16 @@ def ajouter_points():
 
     try:
         points_ajoutes = int(data.get("points", 0))
-        if points_ajoutes < 0:
-            return jsonify({"message": "Les points ne peuvent pas être négatifs"}), 400
 
+        # Allow negative points for removal
         eleve.points += points_ajoutes
         db.session.commit()
-        return jsonify({"message": "Points ajoutés avec succès", "total_points": eleve.points}), 200
+
+        return jsonify({
+            "message": "Points mis à jour avec succès",
+            "total_points": eleve.points
+        }), 200
+
     except ValueError:
         return jsonify({"message": "Valeur de points invalide"}), 400
 
@@ -76,7 +81,7 @@ def login():
 
     return jsonify({"message": "Identifiants incorrects"}), 401
 
-# Route: Add an admin (One-time setup)
+# Route: Register an admin (One-time setup)
 @app.route('/register_admin', methods=['POST'])
 def register_admin():
     data = request.json
