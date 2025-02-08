@@ -13,17 +13,39 @@ async function chargerEleves() {
     });
 }
 
-chargerEleves();
+async function ajouterPoints(nom, points) {
+    let token = localStorage.getItem("token");
+    let response = await fetch(API_URL + "/ajouter_points", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ nom, points })
+    });
 
-function loginEleve() {
-    window.location.href = "dashboard.html";
+    let result = await response.json();
+    alert(result.message);
+    chargerEleves();
 }
 
-function loginAdmin() {
-    let password = prompt("Entrez le mot de passe admin :");
-    if (password === "admin123") {
+async function loginAdmin() {
+    let username = prompt("Nom d'utilisateur admin :");
+    let password = prompt("Mot de passe :");
+
+    let response = await fetch(API_URL + "/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+    });
+
+    let result = await response.json();
+    if (response.ok) {
+        localStorage.setItem("token", result.access_token);
         window.location.href = "admin.html";
     } else {
-        alert("Mot de passe incorrect !");
+        alert("Identifiants incorrects !");
     }
 }
+
+chargerEleves();
