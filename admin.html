@@ -7,8 +7,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+
+    <div class="container" id="loginForm">
+        <h1>Connexion Admin</h1>
+        <input type="text" id="adminUsername" placeholder="Nom d'utilisateur">
+        <input type="password" id="adminPassword" placeholder="Mot de passe">
+        <button onclick="loginAdmin()">Se connecter</button>
+    </div>
+
+    <div class="container" id="adminPanel" style="display:none;">
         <h1>Interface Admin</h1>
+        <button onclick="logoutAdmin()">Déconnexion</button>
         <p>Liste des élèves</p>
         <table border="1">
             <tr>
@@ -19,10 +28,11 @@
             <tbody id="listeEleves"></tbody>
         </table>
 
-        <h2>Ajouter des points</h2>
+        <h2>Gérer les points</h2>
         <input type="text" id="nomEleve" placeholder="Nom de l'élève">
         <input type="number" id="points" placeholder="Points">
-        <button onclick="ajouterPoints(document.getElementById('nomEleve').value, document.getElementById('points').value)">Ajouter</button>
+        <button onclick="ajouterPoints()">Ajouter</button>
+        <button onclick="retirerPoints()">Retirer</button>
     </div>
 
     <script src="script.js"></script>
