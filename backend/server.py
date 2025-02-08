@@ -10,7 +10,7 @@ app = Flask(__name__)
 # Database configuration
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///eleves.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["JWT_SECRET_KEY"] = "supersecretkey"  # Change this in production!
+app.config["JWT_SECRET_KEY"] = "9989ae36f57abcd5f59aaf9f1b3ef2d2da40e711784ed8ce614cb78d9fd458b8"  # Change this in production!
 
 # Initialize extensions
 db = SQLAlchemy(app)
