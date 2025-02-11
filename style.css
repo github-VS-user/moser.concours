@@ -32,3 +32,10 @@ button {
 button:hover {
     background: #0056b3;
 }
+body {
+    background-image: url('images/background.jpg'); /* Remplace par le chemin de ton image */
+    background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
+    background-position: center; /* Centre l'image */
+    background-attachment: fixed; /* Rend l'image fixe */
+    background-repeat: no-repeat; /* Empêche la répétition */
+}
