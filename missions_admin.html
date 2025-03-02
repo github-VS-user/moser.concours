@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Missions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="adminPanel">
+        <h1>Gestion des Missions</h1>
+        <button onclick="logoutAdmin()">Déconnexion</button>
+        
+        <h2>Ajouter une Mission</h2>
+        <input type="text" id="missionTitre" placeholder="Titre de la mission">
+        <textarea id="missionDescription" placeholder="Description de la mission"></textarea>
+        <input type="number" id="missionPoints" placeholder="Points">
+        <button onclick="ajouterMission()">Ajouter Mission</button>
+
+        <h2>Liste des Missions</h2>
+        <table border="1">
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Points</th>
+                <th>Action</th>
+            </tr>
+            <tbody id="listeMissions"></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
