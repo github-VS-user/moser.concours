@@ -103,3 +103,30 @@ PORT = int(os.environ.get("PORT", 5000))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=PORT, debug=True)
+
+# Route: Add a mission (Admin only)
+@app.route('/ajouter_mission', methods=['POST'])
+@jwt_required()
+def ajouter_mission():
+    data = request.json
+    new_mission = Mission(titre=data.get("titre"), description=data.get("description"), points=data.get("points"))
+    db.session.add(new_mission)
+    db.session.commit()
+    return jsonify({"message": "Mission ajoutée avec succès"}), 201
+
+# Route: Get all missions
+@app.route('/missions', methods=['GET'])
+def get_missions():
+    missions = Mission.query.all()
+    return jsonify([{"id": m.id, "titre": m.titre, "description": m.description, "points": m.points} for m in missions])
+
+# Route: Delete a mission (Admin only)
+@app.route('/supprimer_mission/<int:id>', methods=['DELETE'])
+@jwt_required()
+def supprimer_mission(id):
+    mission = Mission.query.get(id)
+    if not mission:
+        return jsonify({"message": "Mission non trouvée"}), 404
+    db.session.delete(mission)
+    db.session.commit()
+    return jsonify({"message": "Mission supprimée avec succès"}), 200
