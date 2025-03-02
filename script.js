@@ -91,3 +91,65 @@ document.addEventListener("DOMContentLoaded", () => {
         chargerEleves();
     }
 });
+
+// Function to add a mission
+async function ajouterMission() {
+    let token = localStorage.getItem("token");
+    let titre = document.getElementById("missionTitre").value;
+    let description = document.getElementById("missionDescription").value;
+    let points = parseInt(document.getElementById("missionPoints").value);
+
+    let response = await fetch(API_URL + "/ajouter_mission", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ titre, description, points })
+    });
+
+    let result = await response.json();
+    alert(result.message);
+    chargerMissions();
+}
+
+// Function to load missions
+async function chargerMissions() {
+    let response = await fetch(API_URL + "/missions");
+    let data = await response.json();
+
+    let liste = document.getElementById("listeMissions");
+    liste.innerHTML = "";
+    
+    data.forEach(mission => {
+        let row = `<tr>
+            <td>${mission.titre}</td>
+            <td>${mission.description}</td>
+            <td>${mission.points}</td>
+            <td><button onclick="supprimerMission(${mission.id})">Supprimer</button></td>
+        </tr>`;
+        liste.innerHTML += row;
+    });
+}
+
+// Function to delete a mission
+async function supprimerMission(id) {
+    let token = localStorage.getItem("token");
+    let response = await fetch(API_URL + "/supprimer_mission/" + id, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    let result = await response.json();
+    alert(result.message);
+    chargerMissions();
+}
+
+// Load missions on page load
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("token")) {
+        chargerMissions();
+    }
+});
